@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://wwww.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Platos</title>
+        <meta charset="UTF-8"/>
+        <link rel="stylesheet" href="/css/estilos.css"/>
+        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
+        <script th:src="@{/js/rutinas.js}"></script>
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    </head>
+    <body>
+        <!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
+        <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">   
+                        <button 
+                            type="button" 
+                            class="btn btn-primary btn-block" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#agregarPlato">
+                            <i class="fas fa-plus"></i> <span th:text="Agregar">Agregar Plato</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2 Sección principal para mostrar la informacion de la entidad Plato -->
+
+        <section th:fragment="listadoPlatos" id="platos">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Platos</h4>
+                            </div>
+                            <div th:if="${platos != null and !platos.isEmpty()}">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Descripción</th>
+                                            <th scope="col">Precio</th>
+                                            <th scope="col">Existencias</th>
+                                            <th scope="col">total_producto</th>
+                                            <th scope="col">categoria</th>
+                                            <th scope="col">dispoible</th>
+                                            <th scope="col">ruta_imagen</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="plato : ${platos}">
+                                            <td th:text="${plato.idPlato}"></td>
+                                            <td th:text="${plato.descripcion}"></td>
+                                            <td th:text="${plato.precio}"></td>
+                                            <td th:text="${plato.existencias}"></td>
+                                            <td th:text="${plato.categoria.nombre}"></td>
+                                            <td th:text="${plato.disponible ? #{general.yes} : #{general.no}}"></td>
+                                            <td>
+                                                <img th:if="${plato.rutaImagen}" th:src="@{${plato.rutaImagen}}" alt="Imagen del plato" class="img-fluid" style="max-width: 100px; height: auto;"/>
+                                            </td>
+                                            <td>
+                                                <a th:href="@{/plato/eliminar/{id}(id=${plato.idPlato})}" class="btn btn-danger btn-sm">
+                                                    <i class="fas fa-trash"></i> <span th:text="#{general.eliminar}">Eliminar</span>
+                                                </a>
+                                                <a th:href="@{/plato/modificar/{id}(id=${plato.idPlato})}" class="btn btn-warning btn-sm">
+                                                    <i class="fas fa-edit"></i> <span th:text="#{general.editar}">Editar</span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="text-center p-2" th:if="${#lists.isEmpty(platos)}">
+                                <span>No hay platos disponibles</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 3 Sección principal para mostrar la información de la entidad Categoría -->
+        <section th:fragment="agregarPlato">
+            <div id="agregarPlato" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title">Agregar Plato</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form th:action="@{/plato/guardar}" th:object="${plato}" method="POST" class="was-validated" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="descripcion">Descripción</label>
+                                    <input type="text" id="descripcion" class="form-control" th:field="*{descripcion}" required/>
+                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="precio">Precio</label>
+                                    <input type="number" id="precio" class="form-control" th:field="*{precio}" required min="0" step="0.01"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="existencias">Existencias</label>
+                                    <input type="number" id="existencias" class="form-control" th:field="*{existencias}" required min="0"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="categoria">Categoría</label>
+                                    <!-- Suponiendo que 'categoria' es un ID de una categoría existente -->
+                                    <select id="categoria" class="form-control" th:field="*{categoria}">
+                                        <!-- Las opciones deben ser generadas dinámicamente -->
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="disponible">Disponible</label>
+                                    <input class="form-check-input" type="checkbox" id="disponible" th:field="*{disponible}"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="imagenFile">Imagen</label>
+                                    <input class="form-control" type="file" id="imagenFile" name="imagenFile" onchange="readURL(this);"/>
+                                    <img id="blah" src="#" alt="Imagen seleccionada" height="200" style="display:none;"/>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 4 editarPlato -->
+        <section th:fragment="editarPlato">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <form id="editForm" th:action="@{/plato/guardar}" 
+                          th:object="${plato}"
+                          method="POST" 
+                          class="was-validated"                          
+                          enctype="multipart/form-data">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 th:text="Actualizar">Actualizar Plato</h4>
+                            </div>
+                            <div class="card-body">
+                                <input type="hidden" th:field="*{idPlato}"/>
+                                <input type="hidden" th:field="*{rutaImagen}"/>
+                                <div class="mb-3">
+                                    <label for="descripcion" th:text="Descripcion">Descripción</label>
+                                    <input type="text" class="form-control" 
+                                           th:field="*{descripcion}"
+
+                            </div>
+                            <div class="mb-3">
+                                <label for="disponible" th:text="Disponible">Disponible</label>
+                                <input class="form-check-input" 
+                                       type="checkbox" 
+                                       th:field="*{disponible}"
+                                       id="disponible">
+                            </div>
+                            <div class="mb-3">
+                                <label for="imagenFile">Imagen</label>
+                                <input class="form-control" type="file" id="imagenFile" name="imagenFile" onchange="readURL(this);" />
+                                <img id="blah" th:if="${plato.rutaImagen}" th:src="@{${plato.rutaImagen}}" alt="Imagen de categoría" height="200" style="display:none;" />
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <!-- Including the button fragment inside the form -->
+                    <div th:replace="~{:: botonesEditar}"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5  botonesEditar-->
+    <section th:fragment="botonesEditar">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end py-4 mb-4 bg-light">
+            <a th:href="@{/plato/listado}" class="btn btn-primary me-md-2">
+                <i class="fas fa-arrow-left"></i> <span th:text="Regresar">Regresar</span>
+            </a>
+            <a th:href="@{/plato/eliminar/{id}(id=${plato.idPlato})}"
+               class="btn btn-danger me-md-2">
+                <i class="fas fa-trash"></i> <span th:text="Eliminar">Eliminar</span>
+            </a>
+            <button type="submit" form="editForm" class="btn btn-success">
+                <i class="fas fa-check"></i> <span th:text="Guardar">Guardar</span>
+            </button>
+        </div>
+    </section>
+    
+    <!-- Fragmento para mostrar un menú a través de un iframe -->
+<section th:fragment="MostrarMenu" style="display: flex; justify-content: center; align-items: center; height: 600px;">
+    <iframe src="https://drive.google.com/file/d/12J9LTSfqPh_0FuDOhMMWCJ3-WS2JF6c2/preview"
+            style="width: 80%; height: 100%; border: none;"
+            allowfullscreen
+            allow="autoplay">
+    </iframe>
+</section>
+
+
+
+
+
+</body>
+</html>
