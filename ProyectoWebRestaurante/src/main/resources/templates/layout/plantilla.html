@@ -21,11 +21,14 @@
                     <img src="https://lh3.googleusercontent.com/p/AF1QipMdytT-WWYtTxaE9540DeK5ts_bYWZwY4o6h8po=s680-w680-h510" alt="Logo">
                 </div>
                 <nav>
+                    
                     <a href="/">Página Principal</a>
-                    <a href="/">Ordenar en línea</a>
+                    <a href="/ordenar">Ordenar en línea</a>
                     <a href="/reservacion/listado">Reservar mesa</a>
                     <a href="/plato/listado">Menú a la carta</a>
-                    <a th:href="@{/categoria/listado}">Carta por categoria</a>
+                    <a href="/categoria/listado">Carta por categoria</a> 
+                    <a href="/navegar/listado">Navegar Menú</a> 
+                    <a href="/navegar/listado2">Filtrar por precios</a>
                     
                 </nav>
                 <div class="cart">
@@ -34,15 +37,15 @@
                         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
                     </svg>
                 </div>
-                </header>
-            </header>            
-            <main-header th:fragment="main-header" >
+            </header>
+        </header>            
+        <main-header th:fragment="main-header" >
             <section class="main-header">
                 <h1>¡Bienvenido al sitio oficial de donde papá restaurant!</h1>
             </section>
 
             <section class="recommendations">
-           
+
                 <div class="card">
                     <img src="https://www.unileverfoodsolutions.com.co/dam/global-ufs/mcos/NOLA/calcmenu/recipes/col-recipies/fruco-tomate-cocineros/HAMBURGUESA%201200x709.png" alt="Hamburguesa Donde Papá">
                         <h2>Hamburguesa Donde Papá</h2>
@@ -59,7 +62,7 @@
                         <p>CRC 3,800.00 -Crujientes aros de cebolla dorados, acompañados de salsa especial para deleitar el paladar. </p>
                 </div>
 
-              
+
             </section>
             <section class="live-music">
                 <div class="content">
@@ -67,7 +70,7 @@
                     <div class="image-container">
 
                         <img src="https://media-cdn.tripadvisor.com/media/photo-s/0e/8c/69/8e/musica-en-vivo-patron.jpg"  alt="Ambiente del restaurante con música en vivo">
-                       
+
                     </div>
                 </div>
 
@@ -83,72 +86,72 @@
                             referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
                 </div>
-                </main-header>
-            </section>
-
-
-
-
-
-
-        </header>
-        <section>
-
+        </main-header>
         </section>
-        <footer th:fragment="footer" class="footer">
-            <div class="wrap-footer">
-                <div class="text-element-footer element-footer">
-                    <h3>Donde Papá Restaurant</h3>
-                    <p>Donde Papá, en Heredia, es un acogedor restaurante familiar donde los sabores tradicionales y el ambiente cálido te hacen sentir en casa. Especializado en platos caseros, ofrece una experiencia culinaria auténtica y un trato cercano, convirtiéndose en el lugar perfecto para disfrutar de la cocina local en familia.</p>
-                </div>
-                <div class="text-element-footer element-footer">
-                    <h5>Dirección</h5>
-                    <ul>
-                        <li>Street 1, Avenue 11, Fatima, Heredia.</li>
-                        <li>Heredia, Costa Rica</li>
-                        <li>contacto: 2102 0467</li>
-                        <li>Correo electrónico: restaurantedondepapa@gmail.com</li>
-                    </ul>
-                </div>
-                <div class="text-element-footer element-footer">
-                    <h5>Más información</h5>
-                    <ul class="footer-nav">
-                        <li><a href="/">Página Principal</a></li>
-                        <li><a href="/">Ordenar en línea</a></li>
-                        <li><a href="/reservacion/listado">Reservar mesa</a></li>
-                        <li><a href="/plato/listado">Menú a la carta</a></li>
-                        <li><a href="/categoria/listado">Carta por categoria</a></li>
-                    </ul>
-                </div>
-                <div class="rrss-element-footer element-footer">
-                    <h5>Redes Sociales</h5>
-                    <ul>
-                        <li><a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwillfPEvPCEAxVjmLAFHbCEC0QQFnoECBAQAQ&url=https%3A%2F%2Fwww.facebook.com%2FDondepaparestaurante%2F%3Flocale%3Des_LA&usg=AOvVaw0fjAlWhu5Ayl6jIOYVnAax&opi=89978449">
-                                <img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJtNTEyIDc1djM2MmMwIDQxLjM5ODQzOC0zMy42MDE1NjIgNzUtNzUgNzVoLTEyMWwtMzAtMzBoLTMwbC0zMCAzMGgtMTUxYy00MS4zOTg0MzggMC03NS0zMy42MDE1NjItNzUtNzV2LTM2MmMwLTQxLjM5ODQzOCAzMy42MDE1NjItNzUgNzUtNzVoMzYyYzQxLjM5ODQzOCAwIDc1IDMzLjYwMTU2MiA3NSA3NXptMCAwIiBmaWxsPSIjNzk4NGViIi8+PHBhdGggZD0ibTUxMiA3NXYzNjJjMCA0MS4zOTg0MzgtMzMuNjAxNTYyIDc1LTc1IDc1aC0xMjFsLTMwLTMwaC0xNXYtNDgyaDE2NmM0MS4zOTg0MzggMCA3NSAzMy42MDE1NjIgNzUgNzV6bTAgMCIgZmlsbD0iIzQ2NjFkMSIvPjxwYXRoIGQ9Im0zMTYgMTgwdjYwaDkwbC0xNSA5MGgtNzV2MTgyaC05MHYtMTgyaC02MHYtOTBoNjB2LTYwYzAtMzMuMzAwNzgxIDE4LjMwMDc4MS02Mi40MDIzNDQgNDUtNzggMTMuMTk5MjE5LTcuNSAyOC44MDA3ODEtMTIgNDUtMTJoOTB2OTB6bTAgMCIgZmlsbD0iI2VjZWNmMSIvPjxwYXRoIGQ9Im0zMTYgMTgwdjYwaDkwbC0xNSA5MGgtNzV2MTgyaC00NXYtNDEwYzEzLjE5OTIxOS03LjUgMjguODAwNzgxLTEyIDQ1LTEyaDkwdjkwem0wIDAiIGZpbGw9IiNlMmUyZTciLz48L3N2Zz4=" alt="icono redes sociales">
-                            </a></li>
-                        <li><a href="https://www.bing.com/ck/a?!&&p=bf44640726d76a3cJmltdHM9MTcxMDIwMTYwMCZpZ3VpZD0wZjI5YzkxZS1mM2UzLTYwYzEtMzQ5NS1kODY3ZjI3MzYxZTgmaW5zaWQ9NTE5OA&ptn=3&ver=2&hsh=3&fclid=0f29c91e-f3e3-60c1-3495-d867f27361e8&psq=instagram+Donde+Pap%c3%a1+Restaurant&u=a1aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9kb25kZXBhcGFyZXN0YXVyYW50Lw&ntb=1">
-                                <img src="https://logodownload.org/wp-content/uploads/2017/04/instagram-logo-6.png" alt="icono redes sociales">
-                            </a></li>
-                        <li><a href="">
-                                <img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJtMjU2IDBjLTE0MC42OTkyMTkgMC0yNTYgMTE1LjMwMDc4MS0yNTYgMjU2IDAgNDYuNSAxMi41OTc2NTYgOTEuNSAzNi4zMDA3ODEgMTMxLjEwMTU2MmwtMzYuMzAwNzgxIDEyNC44OTg0MzggMTI0Ljg5ODQzOC0zNi4zMDA3ODFjMzkuNjAxNTYyIDIzLjY5OTIxOSA4NC42MDE1NjIgMzYuMzAwNzgxIDEzMS4xMDE1NjIgMzYuMzAwNzgxIDE0MC42OTkyMTkgMCAyNTYtMTE1LjMwMDc4MSAyNTYtMjU2cy0xMTUuMzAwNzgxLTI1Ni0yNTYtMjU2em0wIDAiIGZpbGw9IiMwMGRkN2IiLz48cGF0aCBkPSJtNTEyIDI1NmMwIDE0MC42OTkyMTktMTE1LjMwMDc4MSAyNTYtMjU2IDI1NnYtNTEyYzE0MC42OTkyMTkgMCAyNTYgMTE1LjMwMDc4MSAyNTYgMjU2em0wIDAiIGZpbGw9IiMwMGNjNzEiLz48cGF0aCBkPSJtNDE3LjE5OTIxOSAzNjQuMzAwNzgxLTEyIDExLjY5OTIxOWMtMTYuODAwNzgxIDE2LjgwMDc4MS01NS44MDA3ODEgMTUuNTk3NjU2LTgwLjY5OTIxOSAxMC44MDA3ODEtMjIuMTk5MjE5LTQuMTk5MjE5LTQ2LTE0LjEwMTU2Mi02OC41LTI3LjkwMjM0My02MS4xOTkyMTktMzcuMTk5MjE5LTExNi42OTkyMTktMTAzLjE5OTIxOS0xMzAuMTk5MjE5LTE2Mi41OTc2NTctOS4zMDA3ODEtNDAuMjAzMTI1LTQuMTk5MjE5LTc1IDktODguNWwxMi0xMmM2LjYwMTU2My02LjMwMDc4MSAxNy4wOTc2NTctNi4zMDA3ODEgMjMuNjk5MjE5IDBsNDcuNjk5MjE5IDQ3LjY5OTIxOWMzLjMwMDc4MSAzLjMwMDc4MSA1LjEwMTU2MiA3LjUgNS4xMDE1NjIgMTJzLTEuODAwNzgxIDguNjk5MjE5LTUuMTAxNTYyIDEybC0xMiAxMS42OTkyMTljLTEyLjg5ODQzOCAxMy4xOTkyMTktMTIuODk4NDM4IDM0LjUgMCA0Ny42OTkyMTlsNDkuODAwNzgxIDQ4LjkwMjM0MyAyOS4wOTc2NTYgMjguODAwNzgxYzEzLjIwMzEyNSAxMy4xOTkyMTkgMzUuNTAzOTA2IDEzLjE5OTIxOSA0OC43MDMxMjUgMGwxMS42OTkyMTktMTIuMDAzOTA2YzYuMzAwNzgxLTYgMTcuNjk5MjE5LTYgMjQgMGw0Ny42OTkyMTkgNDcuNzAzMTI1YzYuMzAwNzgxIDYuNTk3NjU3IDYuNjAxNTYyIDE3LjA5NzY1NyAwIDI0em0wIDAiIGZpbGw9IiNlY2VjZjEiLz48cGF0aCBkPSJtNDE3LjE5OTIxOSAzNjQuMzAwNzgxLTEyIDExLjY5OTIxOWMtMTYuODAwNzgxIDE2LjgwMDc4MS01NS44MDA3ODEgMTUuNTk3NjU2LTgwLjY5OTIxOSAxMC44MDA3ODEtMjIuMTk5MjE5LTQuMTk5MjE5LTQ2LTE0LjEwMTU2Mi02OC41LTI3LjkwMjM0M3YtODMuMDk3NjU3bDI5LjA5NzY1NiAyOC44MDA3ODFjMTMuMjAzMTI1IDEzLjE5OTIxOSAzNS41MDM5MDYgMTMuMTk5MjE5IDQ4LjcwMzEyNSAwbDExLjY5OTIxOS0xMi4wMDM5MDZjNi4zMDA3ODEtNiAxNy42OTkyMTktNiAyNCAwbDQ3LjY5OTIxOSA0Ny43MDMxMjVjNi4zMDA3ODEgNi41OTc2NTcgNi42MDE1NjIgMTcuMDk3NjU3IDAgMjR6bTAgMCIgZmlsbD0iI2UyZTJlNyIvPjwvc3ZnPg==" alt="icono redes sociales">
-                            </a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-creds">
-                <div class="copy-creds">
-                    <p>©2024 · Todos los derechos reservados.</p>
-                </div>
-                <div class="legal-creds">
-                    <ul>
-                        <li><a href="">Política de Privacidad</a></li>
-                        <li><a href="">Plítica de Cookies</a></li>
-                        <li><a href="">Aviso Legal</a></li>
-                    </ul>
-                </div>
-            </div>
-        </footer>
 
 
-    </body>
+
+
+
+
+    </header>
+    <section>
+
+    </section>
+    <footer th:fragment="footer" class="footer">
+        <div class="wrap-footer">
+            <div class="text-element-footer element-footer">
+                <h3>Donde Papá Restaurant</h3>
+                <p>Donde Papá, en Heredia, es un acogedor restaurante familiar donde los sabores tradicionales y el ambiente cálido te hacen sentir en casa. Especializado en platos caseros, ofrece una experiencia culinaria auténtica y un trato cercano, convirtiéndose en el lugar perfecto para disfrutar de la cocina local en familia.</p>
+            </div>
+            <div class="text-element-footer element-footer">
+                <h5>Dirección</h5>
+                <ul>
+                    <li>Street 1, Avenue 11, Fatima, Heredia.</li>
+                    <li>Heredia, Costa Rica</li>
+                    <li>contacto: 2102 0467</li>
+                    <li>Correo electrónico: restaurantedondepapa@gmail.com</li>
+                </ul>
+            </div>
+            <div class="text-element-footer element-footer">
+                <h5>Más información</h5>
+                <ul class="footer-nav">
+                    <li><a href="/">Página Principal</a></li>
+                    <li><a href="/">Ordenar en línea</a></li>
+                    <li><a href="/reservacion/listado">Reservar mesa</a></li>
+                    <li><a href="/plato/listado">Menú a la carta</a></li>
+                    <li><a href="/categoria/listado">Carta por categoria</a></li>
+                </ul>
+            </div>
+            <div class="rrss-element-footer element-footer">
+                <h5>Redes Sociales</h5>
+                <ul>
+                    <li><a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwillfPEvPCEAxVjmLAFHbCEC0QQFnoECBAQAQ&url=https%3A%2F%2Fwww.facebook.com%2FDondepaparestaurante%2F%3Flocale%3Des_LA&usg=AOvVaw0fjAlWhu5Ayl6jIOYVnAax&opi=89978449">
+                            <img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJtNTEyIDc1djM2MmMwIDQxLjM5ODQzOC0zMy42MDE1NjIgNzUtNzUgNzVoLTEyMWwtMzAtMzBoLTMwbC0zMCAzMGgtMTUxYy00MS4zOTg0MzggMC03NS0zMy42MDE1NjItNzUtNzV2LTM2MmMwLTQxLjM5ODQzOCAzMy42MDE1NjItNzUgNzUtNzVoMzYyYzQxLjM5ODQzOCAwIDc1IDMzLjYwMTU2MiA3NSA3NXptMCAwIiBmaWxsPSIjNzk4NGViIi8+PHBhdGggZD0ibTUxMiA3NXYzNjJjMCA0MS4zOTg0MzgtMzMuNjAxNTYyIDc1LTc1IDc1aC0xMjFsLTMwLTMwaC0xNXYtNDgyaDE2NmM0MS4zOTg0MzggMCA3NSAzMy42MDE1NjIgNzUgNzV6bTAgMCIgZmlsbD0iIzQ2NjFkMSIvPjxwYXRoIGQ9Im0zMTYgMTgwdjYwaDkwbC0xNSA5MGgtNzV2MTgyaC05MHYtMTgyaC02MHYtOTBoNjB2LTYwYzAtMzMuMzAwNzgxIDE4LjMwMDc4MS02Mi40MDIzNDQgNDUtNzggMTMuMTk5MjE5LTcuNSAyOC44MDA3ODEtMTIgNDUtMTJoOTB2OTB6bTAgMCIgZmlsbD0iI2VjZWNmMSIvPjxwYXRoIGQ9Im0zMTYgMTgwdjYwaDkwbC0xNSA5MGgtNzV2MTgyaC00NXYtNDEwYzEzLjE5OTIxOS03LjUgMjguODAwNzgxLTEyIDQ1LTEyaDkwdjkwem0wIDAiIGZpbGw9IiNlMmUyZTciLz48L3N2Zz4=" alt="icono redes sociales">
+                        </a></li>
+                    <li><a href="https://www.bing.com/ck/a?!&&p=bf44640726d76a3cJmltdHM9MTcxMDIwMTYwMCZpZ3VpZD0wZjI5YzkxZS1mM2UzLTYwYzEtMzQ5NS1kODY3ZjI3MzYxZTgmaW5zaWQ9NTE5OA&ptn=3&ver=2&hsh=3&fclid=0f29c91e-f3e3-60c1-3495-d867f27361e8&psq=instagram+Donde+Pap%c3%a1+Restaurant&u=a1aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9kb25kZXBhcGFyZXN0YXVyYW50Lw&ntb=1">
+                            <img src="https://logodownload.org/wp-content/uploads/2017/04/instagram-logo-6.png" alt="icono redes sociales">
+                        </a></li>
+                    <li><a href="">
+                            <img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJtMjU2IDBjLTE0MC42OTkyMTkgMC0yNTYgMTE1LjMwMDc4MS0yNTYgMjU2IDAgNDYuNSAxMi41OTc2NTYgOTEuNSAzNi4zMDA3ODEgMTMxLjEwMTU2MmwtMzYuMzAwNzgxIDEyNC44OTg0MzggMTI0Ljg5ODQzOC0zNi4zMDA3ODFjMzkuNjAxNTYyIDIzLjY5OTIxOSA4NC42MDE1NjIgMzYuMzAwNzgxIDEzMS4xMDE1NjIgMzYuMzAwNzgxIDE0MC42OTkyMTkgMCAyNTYtMTE1LjMwMDc4MSAyNTYtMjU2cy0xMTUuMzAwNzgxLTI1Ni0yNTYtMjU2em0wIDAiIGZpbGw9IiMwMGRkN2IiLz48cGF0aCBkPSJtNTEyIDI1NmMwIDE0MC42OTkyMTktMTE1LjMwMDc4MSAyNTYtMjU2IDI1NnYtNTEyYzE0MC42OTkyMTkgMCAyNTYgMTE1LjMwMDc4MSAyNTYgMjU2em0wIDAiIGZpbGw9IiMwMGNjNzEiLz48cGF0aCBkPSJtNDE3LjE5OTIxOSAzNjQuMzAwNzgxLTEyIDExLjY5OTIxOWMtMTYuODAwNzgxIDE2LjgwMDc4MS01NS44MDA3ODEgMTUuNTk3NjU2LTgwLjY5OTIxOSAxMC44MDA3ODEtMjIuMTk5MjE5LTQuMTk5MjE5LTQ2LTE0LjEwMTU2Mi02OC41LTI3LjkwMjM0My02MS4xOTkyMTktMzcuMTk5MjE5LTExNi42OTkyMTktMTAzLjE5OTIxOS0xMzAuMTk5MjE5LTE2Mi41OTc2NTctOS4zMDA3ODEtNDAuMjAzMTI1LTQuMTk5MjE5LTc1IDktODguNWwxMi0xMmM2LjYwMTU2My02LjMwMDc4MSAxNy4wOTc2NTctNi4zMDA3ODEgMjMuNjk5MjE5IDBsNDcuNjk5MjE5IDQ3LjY5OTIxOWMzLjMwMDc4MSAzLjMwMDc4MSA1LjEwMTU2MiA3LjUgNS4xMDE1NjIgMTJzLTEuODAwNzgxIDguNjk5MjE5LTUuMTAxNTYyIDEybC0xMiAxMS42OTkyMTljLTEyLjg5ODQzOCAxMy4xOTkyMTktMTIuODk4NDM4IDM0LjUgMCA0Ny42OTkyMTlsNDkuODAwNzgxIDQ4LjkwMjM0MyAyOS4wOTc2NTYgMjguODAwNzgxYzEzLjIwMzEyNSAxMy4xOTkyMTkgMzUuNTAzOTA2IDEzLjE5OTIxOSA0OC43MDMxMjUgMGwxMS42OTkyMTktMTIuMDAzOTA2YzYuMzAwNzgxLTYgMTcuNjk5MjE5LTYgMjQgMGw0Ny42OTkyMTkgNDcuNzAzMTI1YzYuMzAwNzgxIDYuNTk3NjU3IDYuNjAxNTYyIDE3LjA5NzY1NyAwIDI0em0wIDAiIGZpbGw9IiNlY2VjZjEiLz48cGF0aCBkPSJtNDE3LjE5OTIxOSAzNjQuMzAwNzgxLTEyIDExLjY5OTIxOWMtMTYuODAwNzgxIDE2LjgwMDc4MS01NS44MDA3ODEgMTUuNTk3NjU2LTgwLjY5OTIxOSAxMC44MDA3ODEtMjIuMTk5MjE5LTQuMTk5MjE5LTQ2LTE0LjEwMTU2Mi02OC41LTI3LjkwMjM0M3YtODMuMDk3NjU3bDI5LjA5NzY1NiAyOC44MDA3ODFjMTMuMjAzMTI1IDEzLjE5OTIxOSAzNS41MDM5MDYgMTMuMTk5MjE5IDQ4LjcwMzEyNSAwbDExLjY5OTIxOS0xMi4wMDM5MDZjNi4zMDA3ODEtNiAxNy42OTkyMTktNiAyNCAwbDQ3LjY5OTIxOSA0Ny43MDMxMjVjNi4zMDA3ODEgNi41OTc2NTcgNi42MDE1NjIgMTcuMDk3NjU3IDAgMjR6bTAgMCIgZmlsbD0iI2UyZTJlNyIvPjwvc3ZnPg==" alt="icono redes sociales">
+                        </a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-creds">
+            <div class="copy-creds">
+                <p>©2024 · Todos los derechos reservados.</p>
+            </div>
+            <div class="legal-creds">
+                <ul>
+                    <li><a href="">Política de Privacidad</a></li>
+                    <li><a href="">Plítica de Cookies</a></li>
+                    <li><a href="">Aviso Legal</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+
+</body>
 </html>

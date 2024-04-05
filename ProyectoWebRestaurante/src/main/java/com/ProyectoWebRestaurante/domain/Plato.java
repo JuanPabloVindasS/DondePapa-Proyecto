@@ -16,24 +16,36 @@ public class Plato implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_plato")
     private Long idPlato;
+    //@Column(name = "id_categoria")
+    //private long idCategoria;         ya no lo utilizamos gracias a la asociación
+    
     private String descripcion;
+    @Column(name = "detalle")
+    private String detalle;
     private double precio;
-    private int existencias;
-    private int categoria;
-    private boolean disponible;
-
+    @Column(name = "ruta_imagen")
     private String rutaImagen;
+    private boolean disponible;
+    
+    //Para poder asociar dos clases que mapean tablas relacionadas como vimos en clase 
+    @ManyToOne
+    @JoinColumn(name="id_categoria")
+    private Categoria categoria;
 
 }
 /*
-CREATE TABLE DondePapa.platos (
-    id_plato INT PRIMARY KEY,
-    descripcion VARCHAR(255),
-    precio DECIMAL(10, 2),
-    existencias INT,
-    total_producto INT,
-    categoria INT,
-    disponible BOOLEAN,
-    FOREIGN KEY (categoria) REFERENCES categorias(id_categoria)
-);
+create table DondePapa.plato (
+  id_plato INT NOT NULL AUTO_INCREMENT,
+  id_categoria INT NOT NULL,
+  descripcion VARCHAR(30) NOT NULL,  
+  detalle VARCHAR(1600) NOT NULL, 
+  precio double, 
+  ruta_imagen varchar(1024),
+  disponible bool,
+  PRIMARY KEY (id_plato),
+  foreign key fk_producto_caregoria (id_categoria) references categoria(id_categoria)  
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
  */

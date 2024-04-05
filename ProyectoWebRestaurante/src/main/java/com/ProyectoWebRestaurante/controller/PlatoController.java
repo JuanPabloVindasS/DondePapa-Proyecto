@@ -1,12 +1,14 @@
 package com.ProyectoWebRestaurante.controller;
 
 import com.ProyectoWebRestaurante.domain.Plato;
+import com.ProyectoWebRestaurante.service.CategoriaService;
 import com.ProyectoWebRestaurante.service.PlatoService;
 import com.ProyectoWebRestaurante.service.FirebaseStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,20 +22,25 @@ public class PlatoController {
     private PlatoService platoService;
     @Autowired
     private FirebaseStorageService firebaseStorageService;
+    @Autowired
+    private CategoriaService categoriaService;
 
     @GetMapping("/listado")
     public String listado(Model model) {
         var lista = platoService.getPlatos(false);
         model.addAttribute("platos", lista);
         model.addAttribute("totalPlatos", lista.size());
-        model.addAttribute("plato", new Plato()); // Add this line
+        model.addAttribute("plato", new Plato());
+
+        var categorias = categoriaService.getCategorias(false);
+        model.addAttribute("categorias", categorias);
+
         return "/plato/listado";
     }
 
     @PostMapping("/guardar")
-    public String save(Plato plato,
-            @RequestParam("imagenFile") MultipartFile imagenFile) {
-        // Primero, guardamos la categoría para asegurarnos de que tenga un ID.
+    public String save(@ModelAttribute("plato") Plato plato, @RequestParam("imagenFile") MultipartFile imagenFile) {
+        // Guardar el Plato para asegurarse de que tenga un ID asignado, necesario para construir la ruta de la imagen
         platoService.save(plato);
 
         // Verificamos si hay una imagen para subir.
@@ -54,6 +61,10 @@ public class PlatoController {
     public String modifica(Plato plato, Model model) {
         plato = platoService.getPlato(plato);
         model.addAttribute("plato", plato);
+
+        var categorias = categoriaService.getCategorias(false);
+        model.addAttribute("categorias", categorias);
+
         return "plato/modifica";
     }
 

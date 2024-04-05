@@ -1,6 +1,7 @@
 package com.ProyectoWebRestaurante.controller;
 
 import com.ProyectoWebRestaurante.domain.Categoria;
+import com.ProyectoWebRestaurante.domain.Plato;
 import com.ProyectoWebRestaurante.service.CategoriaService;
 import com.ProyectoWebRestaurante.service.FirebaseStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,8 @@ public class CategoriaController {
         // Redireccionamos al listado de categorías.
         return "redirect:/categoria/listado";
     }
+
+   
 
     @GetMapping("/modificar/{idCategoria}")
     public String modifica(Categoria categoria, Model model) {

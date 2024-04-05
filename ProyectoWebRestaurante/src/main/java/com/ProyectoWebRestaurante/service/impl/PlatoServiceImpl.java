@@ -1,12 +1,12 @@
 package com.ProyectoWebRestaurante.service.impl;
 
+import com.ProyectoWebRestaurante.dao.PlatoDao;
 import com.ProyectoWebRestaurante.domain.Plato;
+import com.ProyectoWebRestaurante.service.PlatoService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.ProyectoWebRestaurante.dao.PlatoDao;
-import com.ProyectoWebRestaurante.service.PlatoService;
 
 @Service
 public class PlatoServiceImpl implements PlatoService {
@@ -16,9 +16,9 @@ public class PlatoServiceImpl implements PlatoService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Plato> getPlatos(boolean disponible) {
+    public List<Plato> getPlatos(boolean disponibles) {
         var lista = platoDao.findAll();
-        if (disponible) { 
+        if (disponibles) { 
             lista.removeIf(c -> !c.isDisponible());
 
         }
@@ -42,6 +42,27 @@ public class PlatoServiceImpl implements PlatoService {
     @Transactional
     public void delete(Plato plato) {
         platoDao.delete(plato);
+    }
+      @Override
+    @Transactional(readOnly = true)
+    public List<Plato> consultaJPA(double precioInf, double precioSup) {
+        return platoDao.findByPrecioBetweenOrderByDescripcion(precioInf, precioSup);
+    }
+
+    // Se define una consulta tipo JPQL para recuperar los platos
+    // Que se encuentran en un rango de precios ordenados por descripción ascendente
+    @Override
+    @Transactional(readOnly = true)
+    public List<Plato> consultaJPQL(double precioInf, double precioSup) {
+        return platoDao.consultaJPQL(precioInf, precioSup);
+    }
+
+    // Se define una consulta tipo SQL nativa para recuperar los platos
+    // Que se encuentran en un rango de precios ordenados por descripción ascendente
+    @Override
+    @Transactional(readOnly = true)
+    public List<Plato> consultaSQL(double precioInf, double precioSup) {
+        return platoDao.consultaSQL(precioInf, precioSup);
     }
 
 }

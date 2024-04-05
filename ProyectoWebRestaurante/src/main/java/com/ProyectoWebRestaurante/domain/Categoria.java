@@ -2,6 +2,7 @@ package com.ProyectoWebRestaurante.domain;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import lombok.Data;
 
 @Data
@@ -22,6 +23,11 @@ public class Categoria implements Serializable {
     
      @Column(name = "ruta_imagen")
     private String rutaImagen;
+     
+     
+     @OneToMany
+     @JoinColumn(name="id_categoria", updatable = false)
+     private List<Plato>platos;
 }
 
 /*

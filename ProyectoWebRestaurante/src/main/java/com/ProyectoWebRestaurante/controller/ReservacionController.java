@@ -30,7 +30,7 @@ public class ReservacionController {
     @PostMapping("/guardar")
     public String save(Reservacion reservacion) {
         reservacionService.save(reservacion);
-        return "redirect:/reservacion/listado"; // Redirecciona al listado después de guardar
+        return "redirect:/reservacion/listado"; 
     }
 
     @GetMapping("/modificar/{idReservacion}")
