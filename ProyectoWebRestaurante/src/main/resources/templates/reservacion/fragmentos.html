@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
       xmlns:th="http://wwww.thymeleaf.org">
     <head th:replace="~{layout/plantilla :: head}">
         <title>Reservacions</title>
@@ -15,7 +16,7 @@
     </head>
     <body>
         <!-- 1 Sección para crear el boton de agregar... llamará a una ventana modal-->
-        <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light">
+        <section th:fragment="botonesAgregar" class="py-4 mb-4 bg-light" sec:authorize="isAuthenticated()">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">   
@@ -30,6 +31,7 @@
                 </div>
             </div>
         </section>
+
 
         <!-- 2 Sección principal para mostrar la informacion de la entidad Reservacion -->
 
@@ -63,13 +65,17 @@
                                             <td th:text="${reservacion.contacto}"></td>
 
                                             <td>
-                                                <a th:href="@{/reservacion/eliminar/{id}(id=${reservacion.idReservacion})}" class="btn btn-danger btn-sm">
+                                                <a sec:authorize="hasRole('ADMIN') or hasRole('VENDEDOR')"
+                                                   th:href="@{/reservacion/eliminar/{id}(id=${reservacion.idReservacion})}" class="btn btn-danger btn-sm">
                                                     <i class="fas fa-trash"></i> <span th:text="Cancelar">Cancelar</span>
                                                 </a>
-                                                <a th:href="@{/reservacion/modificar/{id}(id=${reservacion.idReservacion})}" class="btn btn-warning btn-sm">
+                                                <a sec:authorize="hasRole('ADMIN') or hasRole('VENDEDOR')"
+                                                   th:href="@{/reservacion/modificar/{id}(id=${reservacion.idReservacion})}" class="btn btn-warning btn-sm">
                                                     <i class="fas fa-edit"></i> <span th:text="Editar">Editar</span>
                                                 </a>
                                             </td>
+
+
                                         </tr>
                                     </tbody>
                                 </table>
@@ -129,65 +135,65 @@
         </section>
         <!-- 4 editarReservacion -->
         <section th:fragment="editarReservacion">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <form id="editForm" th:action="@{/reservacion/guardar}" 
-                  th:object="${reservacion}"
-                  method="POST" 
-                  class="was-validated">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Actualizar Reservación</h4>
-                    </div>
-                    <div class="card-body">
-                        <input type="hidden" th:field="*{idReservacion}"/>
-                        <div class="mb-3">
-                            <label for="nombre">Nombre</label>
-                            <input type="text" id="nombre" class="form-control" th:field="*{nombre}" required/>
-                            <div class="invalid-feedback">Este campo es obligatorio.</div>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <form id="editForm" th:action="@{/reservacion/guardar}" 
+                          th:object="${reservacion}"
+                          method="POST" 
+                          class="was-validated">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Actualizar Reservación</h4>
+                            </div>
+                            <div class="card-body">
+                                <input type="hidden" th:field="*{idReservacion}"/>
+                                <div class="mb-3">
+                                    <label for="nombre">Nombre</label>
+                                    <input type="text" id="nombre" class="form-control" th:field="*{nombre}" required/>
+                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="hora">Hora</label>
+                                    <input type="time" id="hora" class="form-control" th:field="*{hora}" required/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="numeroDeMesa">Número de Mesa</label>
+                                    <input type="number" id="numeroDeMesa" class="form-control" th:field="*{numeroDeMesa}" required min="1"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contacto">Contacto</label>
+                                    <input type="text" id="contacto" class="form-control" th:field="*{contacto}" required/>
+                                </div>
+                            </div>
+                            <div class="card-footer d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button type="submit" class="btn btn-success">Guardar</button>
+                                <a th:href="@{/reservacion/listado}" class="btn btn-secondary">Cancelar</a>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="hora">Hora</label>
-                            <input type="time" id="hora" class="form-control" th:field="*{hora}" required/>
-                        </div>
-                        <div class="mb-3">
-                            <label for="numeroDeMesa">Número de Mesa</label>
-                            <input type="number" id="numeroDeMesa" class="form-control" th:field="*{numeroDeMesa}" required min="1"/>
-                        </div>
-                        <div class="mb-3">
-                            <label for="contacto">Contacto</label>
-                            <input type="text" id="contacto" class="form-control" th:field="*{contacto}" required/>
-                        </div>
-                    </div>
-                    <div class="card-footer d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button type="submit" class="btn btn-success">Guardar</button>
-                        <a th:href="@{/reservacion/listado}" class="btn btn-secondary">Cancelar</a>
-                    </div>
+                    </form>
                 </div>
-            </form>
-        </div>
-    </div>
-</section>
+            </div>
+        </section>
 
-    <!-- 5 botonesEditar -->
-    <section th:fragment="botonesEditar">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end py-4 mb-4 bg-light">
-            <a th:href="@{/reservacion/listado}" class="btn btn-primary me-md-2">
-                <i class="fas fa-arrow-left"></i> <span th:text="Regresar">Regresar</span>
-            </a>
-            <a th:href="@{/reservacion/eliminar/{id}(id=${reservacion.idReservacion})}"
-               class="btn btn-danger me-md-2">
-                <i class="fas fa-trash"></i> <span th:text="Eliminar">Eliminar</span>
-            </a>
-            <button type="submit" form="editForm" class="btn btn-success">
-                <i class="fas fa-check"></i> <span th:text="Guardar">Guardar</span>
-            </button>
-        </div>
-    </section>
+        <!-- 5 botonesEditar -->
+        <section th:fragment="botonesEditar">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end py-4 mb-4 bg-light">
+                <a th:href="@{/reservacion/listado}" class="btn btn-primary me-md-2">
+                    <i class="fas fa-arrow-left"></i> <span th:text="Regresar">Regresar</span>
+                </a>
+                <a th:href="@{/reservacion/eliminar/{id}(id=${reservacion.idReservacion})}"
+                   class="btn btn-danger me-md-2">
+                    <i class="fas fa-trash"></i> <span th:text="Eliminar">Eliminar</span>
+                </a>
+                <button type="submit" form="editForm" class="btn btn-success">
+                    <i class="fas fa-check"></i> <span th:text="Guardar">Guardar</span>
+                </button>
+            </div>
+        </section>
 
 
 
-</body>
+    </body>
 </html>
 
 

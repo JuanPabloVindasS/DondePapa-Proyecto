@@ -1,3 +1,4 @@
+//sebastian Acuña
 package com.ProyectoWebRestaurante.domain;
 
 import jakarta.persistence.*;

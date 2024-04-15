@@ -13,7 +13,7 @@ CREATE TABLE DondePapa.categoria (
     ruta_imagen VARCHAR(1024)
 );
 
-create table DondePapa.plato (
+CREATE TABLE DondePapa.plato (
   id_plato INT NOT NULL AUTO_INCREMENT,
   id_categoria INT NOT NULL,
   descripcion VARCHAR(255) NOT NULL,  
@@ -35,6 +35,32 @@ CREATE TABLE DondePapa.reservacion (
     contacto VARCHAR(255)  
 );
 
+/*Se crea la tabla de clientes llamada cliente... igual que la clase Cliente */
+CREATE TABLE DondePapa.usuario (
+  id_usuario INT NOT NULL AUTO_INCREMENT,
+  username varchar(20) NOT NULL,
+  password varchar(512) NOT NULL,
+  nombre VARCHAR(20) NOT NULL,
+  apellidos VARCHAR(30) NOT NULL,
+  correo VARCHAR(1024) NULL,
+  telefono VARCHAR(15) NULL,
+  ruta_imagen varchar(1024),
+  activo boolean,
+  PRIMARY KEY (`id_usuario`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+/*Se crea la tabla de rol llamada rol... igual que la clase rol */
+create table DondePapa.rol (
+  id_rol INT NOT NULL AUTO_INCREMENT,
+  nombre varchar(20),
+  id_usuario int,
+  PRIMARY KEY (id_rol),
+  foreign key fk_rol_usuario (id_usuario) references usuario(id_usuario)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
 INSERT INTO DondePapa.categoria (descripcion, disponible, ruta_imagen) VALUES 
 ('Desayuno', true, 'https://content.clara.es/medio/2023/04/10/cenas-saludables_d783748b_230410125848_1280x1376.jpg'),
 ('Almuerzo', true, 'https://www.gourmet.com.co/wp-content/uploads/2020/08/almuerzo-saludable-imagen-destacada.jpg'),
@@ -49,6 +75,12 @@ INSERT INTO DondePapa.categoria (descripcion, disponible, ruta_imagen) VALUES
 ('Mariscos', true, 'https://www.comedera.com/wp-content/uploads/2023/09/Cazuela-de-mariscos-shutterstock_1836014740.jpg'),
 ('Bebidas', true, 'https://www.coca-cola.com/content/dam/onexp/es/es/body/sostenibilidad/nuestros-productos/compania-total-de-bebidas/compania-total-bebidas.jpg'),
 ('Boquitas y Entradas', true, 'https://www.eventos299.com/wp-content/uploads/2023/08/WhatsApp-Image-2023-08-19-at-10.30.05-1024x647.jpeg');
+
+/*Se insertan 3 registros en la tabla cliente como ejemplo */
+INSERT INTO DondePapa.usuario (id_usuario, username,password,nombre, apellidos, correo, telefono,ruta_imagen,activo) VALUES 
+(1,'juan','$2a$10$P1.w58XvnaYQUQgZUCk4aO/RTRl8EValluCqB3S2VMLTbRt.tlre.','Juan', 'Castro Mora',    'jcastro@gmail.com',    '4556-8978', 'https://img.freepik.com/foto-gratis/chico-guapo-seguro-posando-contra-pared-blanca_176420-32936.jpg',true),
+(2,'lafit','$2a$10$GkEj.ZzmQa/aEfDmtLIh3udIH5fMphx/35d0EYeqZL5uzgCJ0lQRi','Chuty',  'Villalobos', 'chutyvillalobos@gmail.com', '5456-8789','https://pbs.twimg.com/media/EahiQBxX0AEud1m.jpg',true),
+(3,'allan','$2a$10$koGR7eS22Pv5KdaVJKDcge04ZB53iMiw76.UjHPY.XyVYlYqXnPbO','Allan', 'Allan Loria',     'allanlafit@gmail.com',      '7898-8936','https://www.diarioextra.com/files/Dnews/images/detail/500526_allanvillalobos.jpg',true);
 
 
 
@@ -68,3 +100,7 @@ INSERT INTO DondePapa.plato (descripcion, detalle, precio, id_categoria, disponi
 ('Chifrijo', 'Combinación de chicharrón, frijoles y arroz', 3500,4, true, 'https://www.puravidamoms.com/wp-content/uploads/2020/02/costa-rican-chifrijo-recipe.jpg');
 
 
+insert into Dondepapa.rol (id_rol, nombre, id_usuario) values
+ (1,'ROLE_ADMIN',1), (2,'ROLE_VENDEDOR',1), (3,'ROLE_USER',1),
+ (4,'ROLE_VENDEDOR',2), (5,'ROLE_USER',2),
+ (6,'ROLE_USER',3);

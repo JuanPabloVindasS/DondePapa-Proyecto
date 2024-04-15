@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
       xmlns:th="http://wwww.thymeleaf.org">
     <head th:fragment="head">
         <title>Donde Papá</title>
-
         <meta charset="UTF-8"/>
         <link rel="stylesheet" href="/css/estilos.css"/>
         <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
@@ -18,25 +18,59 @@
         <header th:fragment="header" >
             <header class="navbar">
                 <div class="logo">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipMdytT-WWYtTxaE9540DeK5ts_bYWZwY4o6h8po=s680-w680-h510" alt="Logo">
+                    <a href="/">
+                        <img src="https://lh3.googleusercontent.com/p/AF1QipMdytT-WWYtTxaE9540DeK5ts_bYWZwY4o6h8po=s680-w680-h510" alt="Donde Papá Restaurant Logo">
+                    </a>
                 </div>
-                <nav>
-                    
-                    <a href="/">Página Principal</a>
-                    <a href="/ordenar">Ordenar en línea</a>
-                    <a href="/reservacion/listado">Reservar mesa</a>
-                    <a href="/plato/listado">Menú a la carta</a>
-                    <a href="/categoria/listado">Carta por categoria</a> 
-                    <a href="/navegar/listado">Navegar Menú</a> 
-                    <a href="/navegar/listado2">Filtrar por precios</a>
-                    
-                </nav>
-                <div class="cart">
 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="70" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
-                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                    </svg>
-                </div>
+                <nav>
+                    <!-- Links accessible to anyone, including unregistered users and users -->
+                    <a href="/">Página Principal</a>
+                    <a sec:authorize="hasRole('ADMIN')" href="/ordenar">Ordenar en línea</a>
+                    <a href="/navegar/listado">Navegar Menú</a>
+
+                    <!-- Additional links for ADMIN and VENDEDOR roles; ADMIN has access to everything -->
+                    <a  href="/reservacion/listado">Reservar mesa</a>
+                    <a href="/plato/listado">Menú a la carta</a>
+                    <a sec:authorize="hasRole('ADMIN')" href="/categoria/listado">Carta por categoría</a>
+                    <a  href="/navegar/listado2">Filtrar por precios</a>
+
+                    <!-- Admin-exclusive controls -->
+
+
+                    <a sec:authorize="!isAuthenticated()" href="/login">Iniciar Sesión</a>
+                </nav>
+
+                <ul class="navbar-nav" sec:authorize="!isAuthenticated()">
+                    <li class="nav-item px-2 text-white">
+                        <a class "nav-link" th:href="@{/login}">
+                            <i class="fas fa-sign-in-alt"></i>
+                        </a>
+                    </li>
+
+                </ul>
+
+                <u<ul class="navbar-nav" sec:authorize="isAuthenticated()">
+                        <li class="nav-item text-white my-auto">
+                            <img th:src="@{${session.imagenUsuario}}" height="40" alt="User Image" class="rounded-circle"/>
+                            <span sec:authentication="name">xx</span>
+                        </li>
+                    </ul>
+
+                    </li>
+                    <li class="nav-item text-white my-auto">
+                        <form method="post" th:action="@{/logout}">
+                            <button class="btn btn-dark">
+                                <i class="fas fa-sign-out-alt"></i> 
+                            </button>
+
+                        </form>
+                    </li>
+                    </ul>
+
+
+
+
             </header>
         </header>            
         <main-header th:fragment="main-header" >
@@ -87,13 +121,6 @@
                     </iframe>
                 </div>
         </main-header>
-        </section>
-
-
-
-
-
-
     </header>
     <section>
 
