@@ -9,18 +9,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 
-public class IndexController {
+public class Index3Controller {
 
     @Autowired
     private PlatoService platoService;
 
-    @GetMapping("/index2")
+    @GetMapping("/index3")
     public String listado(Model model) {
-        var lista = platoService.getPlatos(true);
-        model.addAttribute("platos", lista);
+    
         
 
-        return "/index2";
+        return "/index3";
 
     }
 

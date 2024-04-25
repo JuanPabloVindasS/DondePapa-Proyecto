@@ -13,6 +13,8 @@ public interface PlatoService {
     
     public List<Plato> getPlatos(boolean disponible);
     
+
+   
     //Se define la firma del método para recuperar UN registro
     //de la tabla categroria el valor de idPlato
     public Plato getPlato(Plato plato);

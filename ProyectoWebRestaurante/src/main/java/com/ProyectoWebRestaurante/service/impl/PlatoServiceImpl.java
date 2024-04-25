@@ -65,4 +65,8 @@ public class PlatoServiceImpl implements PlatoService {
         return platoDao.consultaSQL(precioInf, precioSup);
     }
 
+
+
+
+
 }

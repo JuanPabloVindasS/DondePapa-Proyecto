@@ -19,4 +19,5 @@ function addCard(formulario) {
     var url = '/carrito/agregar';
     url = url + '/' + valor;
     $("#resultsBlock").load(url);
+    
 }

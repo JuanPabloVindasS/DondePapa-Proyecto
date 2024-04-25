@@ -1,5 +1,5 @@
 package com.ProyectoWebRestaurante;
-//Juan Pablo Vindas //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
+
 
 import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,36 +57,49 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
     http
         .authorizeHttpRequests(auth -> auth
             // Public paths
-            .requestMatchers("/","/registro/nuevo","/nuevo", "/crearUsuario"," /registro/salida","/activar","/recordarUsuario","/registro/salida","/registro","/registro/nuevo","/registro/recordar","/registro/salida","/registro/activa", "/index", "/registro/crearUsuario", "/navegar/listado","/navegar/listado/**","/reservacion/guardar","/reservacion/eliminar/**","/reservacion/modificar/**", "/navegar/query1", "/plato/listado", "/ordenar", "/reservacion/listado", "/navegar/listado2", "/css/**", "/js/**", "/webjars/**", "/registro/**")
+            .requestMatchers(
+                "/", "/index", "/index2",
+                "/filtrar/listado", "/filtrar/query1",
+                "/carrito/listado", "/carrito/agregar/**", "/carrito/eliminar/**", "/carrito/modificar/**",
+                "/registro/**", "/registro/nuevo", "/registro/salida", "/registro/activa", "/registro/recordar",
+                "/navegar/listado", "/navegar/listado/**",
+                "/reservacion/guardar", "/reservacion/eliminar/**", "/reservacion/modificar/**",
+                "/plato/listado", "/ordenar",
+                "/css/**", "/js/**", "/webjars/**"
+            )
             .permitAll()
 
-            // User-specific paths (defined to access certain functionalities)
-            .requestMatchers("/navegar/listado", "/reservacion/listado", "/navegar/listado2")
+            // User-specific paths
+            .requestMatchers("/facturar/carrito")
             .hasRole("USER")
 
-            // Vendor-specific paths (no access to order online, and more managerial functions)
+            // Vendor-specific paths
             .requestMatchers("/plato/listado", "/categoria/listado")
             .hasRole("VENDEDOR")
 
-            // Admin-exclusive paths (complete access to all functionalities)
-            .requestMatchers("/categoria/nuevo", "/categoria/modificar/**", "/categoria/eliminar/**", "/categoria/guardar",
-                             "/plato/nuevo", "/plato/modificar/**", "/plato/eliminar/**", "/plato/guardar", "/pruebas/**")
+            // Admin-exclusive paths
+            .requestMatchers(
+                "/categoria/listado", "/categoria/nuevo", "/categoria/modificar/**", "/categoria/eliminar/**", "/categoria/guardar",
+                "/plato/nuevo", "/plato/modificar/**", "/plato/eliminar/**", "/plato/guardar", "/pruebas/**"
+            )
             .hasRole("ADMIN")
 
-            // Paths requiring authentication (for shopping cart and other user-specific actions)
-            .requestMatchers("/facturar/carrito")
-            .authenticated()
+            // Any other authenticated access
+            .anyRequest().authenticated()
         )
         .formLogin(form -> form
-            .loginPage("/login") // Custom login page
-            .defaultSuccessUrl("/index", true) // Redirect to a specific page upon successful login
-            .permitAll())
+            .loginPage("/login")
+            .defaultSuccessUrl("/index", true)
+            .permitAll()
+        )
         .logout(logout -> logout
-            .logoutSuccessUrl("/") // Redirect to homepage on logout
-            .permitAll());
+            .logoutSuccessUrl("/")
+            .permitAll()
+        );
 
     return http.build();
 }
+
 
 //    
 //    @Bean

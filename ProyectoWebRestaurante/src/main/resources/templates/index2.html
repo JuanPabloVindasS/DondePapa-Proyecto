@@ -14,8 +14,11 @@
 <body>
     <header th:replace="~{layout/plantilla :: header}"/>
     
+    
 
-    <header th:replace="~{layout/plantilla :: main-header}"/>
+    <section th:replace="~{carrito/fragmentos :: listadoPlatos}"/>
+     <section th:replace="~{carrito/fragmentos :: verCarrito}"/>
+    
 
     <footer th:replace="~{layout/plantilla :: footer}"/>
     

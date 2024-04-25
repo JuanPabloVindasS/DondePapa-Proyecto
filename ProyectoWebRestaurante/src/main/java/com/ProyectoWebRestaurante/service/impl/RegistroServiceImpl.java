@@ -24,7 +24,7 @@ public class RegistroServiceImpl implements RegistroService {
     @Autowired
     private UsuarioService usuarioService;
     @Autowired
-    private MessageSource messageSource;  //creado en semana 4...
+    private MessageSource messageSource; 
     @Autowired
     private FirebaseStorageServiceImpl firebaseStorageService;
 

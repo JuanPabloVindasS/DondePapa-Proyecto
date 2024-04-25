@@ -24,21 +24,23 @@
                 </div>
 
                 <nav>
-                    <!-- Links accessible to anyone, including unregistered users and users -->
+
                     <a href="/">Página Principal</a>
-                    <a sec:authorize="hasRole('ADMIN')" href="/ordenar">Ordenar en línea</a>
+                    
                     <a href="/navegar/listado">Navegar Menú</a>
 
-                    <!-- Additional links for ADMIN and VENDEDOR roles; ADMIN has access to everything -->
+
                     <a  href="/reservacion/listado">Reservar mesa</a>
                     <a href="/plato/listado">Menú a la carta</a>
                     <a sec:authorize="hasRole('ADMIN')" href="/categoria/listado">Carta por categoría</a>
-                    <a  href="/navegar/listado2">Filtrar por precios</a>
-
-                    <!-- Admin-exclusive controls -->
-
+                    <a  href="/filtrar/listado">Filtrar por precios</a>
+                    <a  href="/index2">Ordenar</a>
+                   
 
                     <a sec:authorize="!isAuthenticated()" href="/login">Iniciar Sesión</a>
+                     <a href="/carrito/listado" class="shopping-cart-link">
+                        <i class="fas fa-shopping-cart"></i> 
+                    </a>
                 </nav>
 
                 <ul class="navbar-nav" sec:authorize="!isAuthenticated()">
@@ -144,10 +146,11 @@
                 <h5>Más información</h5>
                 <ul class="footer-nav">
                     <li><a href="/">Página Principal</a></li>
-                    <li><a href="/">Ordenar en línea</a></li>
                     <li><a href="/reservacion/listado">Reservar mesa</a></li>
-                    <li><a href="/plato/listado">Menú a la carta</a></li>
+                    <li><a href="/reservacion/listado">Menú a la carta</a></li>
+                    <li><a href="/plato/listado">Filtrar por precio </a></li>
                     <li><a href="/categoria/listado">Carta por categoria</a></li>
+                    <li><a href="/login">Iniciar Sesión </a></li>
                 </ul>
             </div>
             <div class="rrss-element-footer element-footer">

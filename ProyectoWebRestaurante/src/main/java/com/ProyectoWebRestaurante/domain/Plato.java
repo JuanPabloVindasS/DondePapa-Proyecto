@@ -23,6 +23,8 @@ public class Plato implements Serializable {
     @Column(name = "detalle")
     private String detalle;
     private double precio;
+    @Column(name = "existencias")
+    private int existencias;
     @Column(name = "ruta_imagen")
     private String rutaImagen;
     private boolean disponible;
